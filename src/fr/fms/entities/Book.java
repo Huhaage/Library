@@ -87,9 +87,15 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "\nBook [id=" + id + ", titel=" + titel + ", author=" + author + ", publishingHouse=" + publishingHouse
-				+ ", occasions=" + occasions + ", price=" + price + "]";
-	}
-
+			return centerString(String.valueOf(id)) + centerString(titel) + centerString(author) + centerString(publishingHouse)
+			+ centerString(String.valueOf(occasions)) + centerString(String.valueOf(price));
+		}
 	
+	public static String centerString(String str) {
+		if(str.length() >= 20) return str;
+		String dest = "                    ";
+		int deb = (20 - str.length())/2 ;
+		String data = new StringBuilder(dest).replace( deb, deb + str.length(), str ).toString();
+		return data;
+	}	
 }

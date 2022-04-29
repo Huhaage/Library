@@ -40,5 +40,6 @@ public class Customer {
 	public String toString() {
 		return "\nUser [id=" + id + ", login=" + login + ", password=" + password + "]";
 	}
-	
+
+
 }

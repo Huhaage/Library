@@ -12,22 +12,22 @@ public class CustomerDao implements Dao<Customer>{
 
 	@Override
 	public ArrayList<Customer> readAll() {
-		ArrayList<Customer> users = new ArrayList<Customer>();
-		String strSql = "SELECT * FROM T_Users";
+		ArrayList<Customer> customers = new ArrayList<Customer>();
+		String strSql = "SELECT * FROM T_Customer";
 		try(Statement statement = connection.createStatement()){
 			try(ResultSet resultSet = statement.executeQuery(strSql)){ 
 				while (resultSet.next()) {
 					int rsId = resultSet.getInt(1);
 					String rsLogin = resultSet.getString(2);
 					String rsPassword = resultSet.getString(3);
-					users.add((new Customer(rsId,rsLogin,rsPassword)));
+					customers.add((new Customer(rsId,rsLogin,rsPassword)));
 				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return users;
+		return customers;
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class CustomerDao implements Dao<Customer>{
 
 	@Override
 	public boolean add(Customer obj) {
-		String str = "INSERT INTO T_Users (Title,Author) "
+		String str = "INSERT INTO T_Customer (Title,Author) "
 				+ "VALUES (?,?)";
 		try (PreparedStatement ps = connection.prepareStatement(str)){
 			ps.setString(1, obj.getLogin());
@@ -53,7 +53,7 @@ public class CustomerDao implements Dao<Customer>{
 	@Override
 	public boolean delete(Customer obj) {
 		try (Statement statement = connection.createStatement()){
-			String str = "DELETE FROM T_Book where IdUser=" + obj.getId() + ";";									
+			String str = "DELETE FROM T_Customer where IdCustomer=" + obj.getId() + ";";									
 			statement.executeUpdate(str);		
 			return true;
 		} catch (SQLException e) {
@@ -63,11 +63,15 @@ public class CustomerDao implements Dao<Customer>{
 	}
 
 	@Override
-	public Customer read() {
-		// TODO Auto-generated method stub
+	public Customer read(int id) {
+		try (Statement statement = connection.createStatement()){
+			String str = "SELECT * FROM T_Customer where IdCustomer=" + id + ";";									
+			ResultSet rs = statement.executeQuery(str);
+			if(rs.next()) return new Customer(rs.getInt(1) , rs.getString(2) , rs.getString(3));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 	
 		return null;
 	}
-
-
 
 }

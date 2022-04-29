@@ -53,7 +53,7 @@ public class BookDao implements Dao<Book> {
 	@Override
 	public boolean delete(Book obj) {
 		try (Statement statement = connection.createStatement()){
-			String str = "DELETE FROM T_Book where IdArticle=" + obj.getId() + ";";									
+			String str = "DELETE FROM T_Book where IdBook=" + obj.getId() + ";";									
 			statement.executeUpdate(str);		
 			return true;
 		} catch (SQLException e) {
@@ -86,8 +86,35 @@ public class BookDao implements Dao<Book> {
 	}
 
 	@Override
-	public Book read() {
-		// TODO Auto-generated method stub
+	public Book read(int id) {
+		try (Statement statement = connection.createStatement()){
+			String str = "SELECT * FROM T_Books where IdBook=" + id + ";";									
+			ResultSet rs = statement.executeQuery(str);
+			if(rs.next()) return new Book(rs.getInt(1) , rs.getString(2) , rs.getString(3), rs.getString(4), rs.getBoolean(5), rs.getFloat(6));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 	
 		return null;
+	}
+
+	public ArrayList<Book> readAllByTheme(int id) {
+		ArrayList<Book> books = new ArrayList<Book>();
+		String strSql = "SELECT * FROM T_Books where idTheme=" + id;		
+		try(Statement statement = connection.createStatement()){
+			try(ResultSet resultSet = statement.executeQuery(strSql)){ 			
+				while(resultSet.next()) {
+					int rsId = resultSet.getInt(1);	
+					String rsTitel = resultSet.getString(2);
+					String rsAuthor = resultSet.getString(3);
+					String rsPublishingHouse = resultSet.getString(4);
+					boolean rsOccation = resultSet.getBoolean(5);
+					float rsPrice = resultSet.getFloat(6);		
+					books.add((new Book(rsId,rsTitel,rsAuthor,rsPublishingHouse,rsOccation,rsPrice)));						
+				}	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}			
+		return books;
 	}
 }

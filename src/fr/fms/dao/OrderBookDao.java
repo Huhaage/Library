@@ -13,12 +13,6 @@ public class OrderBookDao implements Dao<OrderBook> {
 	}
 
 	@Override
-	public OrderBook read() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public ArrayList<OrderBook> readByCategory(long id) {
 		// TODO Auto-generated method stub
 		return null;
@@ -34,6 +28,12 @@ public class OrderBookDao implements Dao<OrderBook> {
 	public boolean delete(OrderBook obj) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public OrderBook read(int idUser) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

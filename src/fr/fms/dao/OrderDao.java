@@ -38,12 +38,11 @@ public class OrderDao implements Dao<Order> {
 
 	@Override
 	public boolean add(Order obj) {
-		String str = "INSERT INTO T_Users (Amount,Date,IdUsers) "
-				+ "VALUES (?,?,?)";
+		String str = "INSERT INTO T_Users (Amount,IdUsers) "
+				+ "VALUES (?,?)";
 		try (PreparedStatement ps = connection.prepareStatement(str)){
 			ps.setDouble(1, obj.getAmount());
-			ps.setDate(2, (java.sql.Date) obj.getDate());
-			ps.setInt(3, obj.getIdUser());
+			ps.setInt(3, obj.getIdCustomer());
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -55,9 +54,9 @@ public class OrderDao implements Dao<Order> {
 	public boolean delete(Order obj) {
 		return false;
 	}
-
+	
 	@Override
-	public Order read() {
+	public Order read(int idUser) {
 		// TODO Auto-generated method stub
 		return null;
 	}

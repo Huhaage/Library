@@ -6,20 +6,19 @@ public class Order {
 	private int idOrder;
 	private double amount;
 	private Date date;
-	private int idUser;
+	private int idCustomer;
 	
-	public Order(int idOrder, double amount, Date date, int idUser) {
+	public Order(int idOrder, double amount, Date date, int idCustomer) {
 		this.idOrder = idOrder;
 		this.amount = amount;
 		this.date = date;
-		this.idUser = idUser;
+		this.idCustomer = idCustomer;
 	}
 	
-	public Order(double amount, Date date, int idUser) {
-		super();
+	public Order(double amount, Date date, int idCustomer) {
 		this.amount = amount;
 		this.date = date;
-		this.idUser = idUser;
+		this.idCustomer = idCustomer;
 	}
 
 	public int getIdOrder() {
@@ -46,17 +45,17 @@ public class Order {
 		return date;
 	}
 	
-	public int getIdUser() {
-		return idUser;
+	public int getIdCustomer() {
+		return idCustomer;
 	}
 
-	public void setIdUser(int idUser) {
-		this.idUser = idUser;
+	public void setIdCustomer(int idCustomer) {
+		this.idCustomer = idCustomer;
 	}
 
 	@Override
 	public String toString() {
-		return "Order [idOrder=" + idOrder + ", amount=" + amount + ", date=" + date + ", idUser=" + idUser + "]";
+		return "Order [idOrder=" + idOrder + ", amount=" + amount + ", date=" + date + ", idUser=" + idCustomer + "]";
 	}
 	
 }

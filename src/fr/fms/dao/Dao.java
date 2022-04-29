@@ -20,7 +20,6 @@ public interface Dao<L> {
 	 * @return ArrayList<T> corresponding
 	 */
 	public ArrayList<L> readAll();
-	public L read();
 	/**
 	 * reference of the objects corresponding to the category in base
 	 * @param category ask
@@ -39,5 +38,7 @@ public interface Dao<L> {
 	 * @return true if done, otherwise false
 	 */
 	public boolean delete(L obj);
+	
+	public L read(int id);
 }
 
